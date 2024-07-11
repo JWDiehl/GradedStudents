@@ -1,8 +1,9 @@
 package io.zipcoder;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 
-public class Student {
+public class Student implements Comparable<Student>{
 
     //    Part 1.1; Defining instance variables
     //Declare an instance variable for each of the previously mentioned properties:
@@ -50,26 +51,39 @@ public class Student {
     }
 
     //getNumberOfExamsTaken
-    public int getNumberOfExamsTaken() {
-        return examScores.size();
-    }
-
-    //Define method getExamScores()
-    //Student should define a method which returns a string representation of all exams taken.
     public String getExamScores() {
-        //String builder
         StringBuilder sb = new StringBuilder();
-        //Header -> per sample output on readme
         sb.append("Exam Scores:\n");
 
-        //Iterate over exam scores and append to StringBuilder
+        //iterate over exam scores and append to StringBuilder
         for (int i = 0; i < examScores.size(); i++) {
             sb.append("\tExam ").append(i + 1).append(" -> ").append(examScores.get(i)).append("\n");
-
         }
-        //Convert String Builder to string and return
+
         return sb.toString();
     }
+
+    //setNumberOfExamsTaken
+    public void setExamScores(ArrayList<Double> examScores) {
+        this.examScores = examScores;
+    }
+
+//    //Define method getExamScores()
+//    //Student should define a method which returns a string representation of all exams taken.
+//    public String getExamScores() {
+//        //String builder
+//        StringBuilder sb = new StringBuilder();
+//        //Header -> per sample output on readme
+//        sb.append("Exam Scores:\n");
+//
+//        //Iterate over exam scores and append to StringBuilder
+//        for (int i = 0; i < examScores.size(); i++) {
+//            sb.append("\tExam ").append(i + 1).append(" -> ").append(examScores.get(i)).append("\n");
+//
+//        }
+//        //Convert String Builder to string and return
+//        return sb.toString();
+//    }
 
     //Define method addExamScore(double examScore)
     //Student should define a method named addExamScore which uses a double parameter to add an examScore to its composite List examScores.
@@ -112,13 +126,40 @@ public class Student {
         sb.append("Student Name: ").append(firstName).append(" ").append(lastName).append("\n");
         sb.append("> Average Score: ").append((int) getAverageExamScore()).append("\n");
         sb.append("> Exam Scores:\n");
-
-
-        //Append the detailed exam scores
-        sb.append(getExamScores());
+        sb.append(getExamScoresAsString());
 
         return sb.toString();
 
     }
 
+    private String getExamScoresAsString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ExamScores:\n");
+        for (int i = 0; i < examScores.size(); i++) {
+            sb.append("\tExam").append(i + 1).append(" -> ").append(examScores.get(i)).append("\n");
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        //Student implements Comparable<Student>
+        //Compare students based on average examScore
+        double thisAverage = this.getAverageExamScore();
+        double otherAverage = o.getAverageExamScore();
+
+        if (thisAverage < otherAverage) {
+            return -1;
+        } else if (thisAverage > otherAverage) {
+            return 1;
+        } else {
+            //if averages are equal, compare based on last name then first name
+            int lastNameCompare = this.lastName.compareTo(o.lastName);
+            if (lastNameCompare != 0) {
+                return lastNameCompare;
+            } else {
+                return this.firstName.compareTo(o.firstName);
+            }
+        }
+    }
 }
