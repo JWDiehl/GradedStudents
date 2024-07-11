@@ -1,6 +1,5 @@
 package io.zipcoder;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Student implements Comparable<Student>{
@@ -51,39 +50,24 @@ public class Student implements Comparable<Student>{
     }
 
     //getNumberOfExamsTaken
-    public String getExamScores() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Exam Scores:\n");
+    public ArrayList<Double> getExamScores() {
 
-        //iterate over exam scores and append to StringBuilder
-        for (int i = 0; i < examScores.size(); i++) {
-            sb.append("\tExam ").append(i + 1).append(" -> ").append(examScores.get(i)).append("\n");
-        }
 
-        return sb.toString();
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("Exam Scores:\n");
+//
+//        //iterate over exam scores and append to StringBuilder
+//        for (int i = 0; i < examScores.size(); i++) {
+//            sb.append("\tExam ").append(i + 1).append(" -> ").append(examScores.get(i)).append("\n");
+//        }
+
+        return examScores;
     }
 
     //setNumberOfExamsTaken
     public void setExamScores(ArrayList<Double> examScores) {
         this.examScores = examScores;
     }
-
-//    //Define method getExamScores()
-//    //Student should define a method which returns a string representation of all exams taken.
-//    public String getExamScores() {
-//        //String builder
-//        StringBuilder sb = new StringBuilder();
-//        //Header -> per sample output on readme
-//        sb.append("Exam Scores:\n");
-//
-//        //Iterate over exam scores and append to StringBuilder
-//        for (int i = 0; i < examScores.size(); i++) {
-//            sb.append("\tExam ").append(i + 1).append(" -> ").append(examScores.get(i)).append("\n");
-//
-//        }
-//        //Convert String Builder to string and return
-//        return sb.toString();
-//    }
 
     //Define method addExamScore(double examScore)
     //Student should define a method named addExamScore which uses a double parameter to add an examScore to its composite List examScores.
